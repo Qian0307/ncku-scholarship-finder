@@ -1,0 +1,19 @@
+# 相依套件
+/node_modules
+
+# Next.js 產出
+/.next
+/out
+
+# 環境變數（機敏金鑰絕不進版控）
+.env*.local
+
+# 爬蟲原始輸出與 AI 快取（體積大，可重新產生）
+/scripts/raw/*.json
+/scripts/raw/**/*.json
+/scripts/raw/*.log
+!/scripts/raw/.gitkeep
+
+# 系統
+.DS_Store
+*.log

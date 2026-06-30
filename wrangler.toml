@@ -1,0 +1,5 @@
+# Cloudflare Pages 設定（供 `wrangler pages deploy` 直接上傳使用）
+# 若以 Git 連動部署，這裡的 build 設定改在 Cloudflare 後台填寫即可。
+name = "ncku-scholarship-finder"
+pages_build_output_dir = "out"
+compatibility_date = "2025-01-01"

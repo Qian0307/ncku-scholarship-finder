@@ -1,0 +1,15 @@
+# Cloudflare Pages 自訂標頭（部署時由 out/_headers 生效）
+
+# 靜態資源長期快取（檔名帶 hash，可安全 immutable）
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 資料檔可被前端 fetch，給較短快取
+/scholarships.json
+  Cache-Control: public, max-age=3600
+
+# 基本安全標頭
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

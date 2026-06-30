@@ -1,0 +1,71 @@
+name: 更新獎學金資料
+
+# 定期重爬成大獎學金系統並重新解析，有變更才 commit public/scholarships.json。
+# 也可在 Actions 頁面手動觸發（workflow_dispatch）。
+
+on:
+  schedule:
+    # 每週一、四 02:00（台灣時間）＝ 週日、三 18:00 UTC
+    - cron: '0 18 * * 0,3'
+  workflow_dispatch:
+    inputs:
+      force_ai:
+        description: '忽略 AI 快取重新解析所有 needs_review 筆（FORCE_AI=1）'
+        type: boolean
+        default: false
+
+# 同時間只跑一個，避免重疊
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安裝相依
+        run: npm ci
+
+      # 跨次保留 Gemini 解析快取（內容定址，內容變了會自動失效）
+      - name: 還原 AI 快取
+        uses: actions/cache@v4
+        with:
+          path: scripts/raw/ai
+          key: scholarship-ai-${{ github.run_id }}
+          restore-keys: |
+            scholarship-ai-
+
+      - name: 爬取（全量刷新）
+        run: npm run scrape
+        env:
+          DELAY_MS: '1100'
+
+      - name: 解析（有金鑰則啟用 AI 輔助）
+        run: npm run parse
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FORCE_AI: ${{ inputs.force_ai && '1' || '0' }}
+
+      - name: 有變更才提交
+        run: |
+          if git status --porcelain public/scholarships.json | grep -q .; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add public/scholarships.json
+            git commit -m "chore(data): 自動更新獎學金資料 $(date +%Y-%m-%d)"
+            git push
+            echo "✅ 已更新並推送"
+          else
+            echo "ℹ 資料無變更，略過提交"
+          fi
