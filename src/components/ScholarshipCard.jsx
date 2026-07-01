@@ -23,7 +23,7 @@ const MATCH_BADGE = {
 };
 
 /** 列表卡片 */
-export default function ScholarshipCard({ scholarship, today, matchState }) {
+export default function ScholarshipCard({ scholarship, today, matchState, matchReasons }) {
   const e = scholarship.eligibility;
   const badge = matchState ? MATCH_BADGE[matchState] : null;
   const econ =
@@ -65,13 +65,30 @@ export default function ScholarshipCard({ scholarship, today, matchState }) {
         {scholarship.needs_review && <Chip tone="amber">部分條件需確認</Chip>}
       </div>
 
-      {/* 「可能符合」時，把無法自動判讀的條件原文顯示出來，方便自行判斷 */}
-      {matchState === 'maybe' && e.other_requirements && (
-        <p className="mt-2 border-l-2 border-amber-200 pl-2 text-xs text-amber-700">
-          需確認：
-          {e.other_requirements.length > 60
-            ? e.other_requirements.slice(0, 60) + '…'
-            : e.other_requirements}
+      {/* 「可能符合」：列出需人工確認的維度與條件原文 */}
+      {matchState === 'maybe' && (
+        <div className="mt-2 space-y-0.5 border-l-2 border-amber-200 pl-2 text-xs text-amber-700">
+          {Array.isArray(matchReasons) &&
+            matchReasons.map((r) => (
+              <p key={r.dim}>
+                需確認：{r.label}（{r.reason}）
+              </p>
+            ))}
+          {e.other_requirements && (
+            <p>
+              需確認：
+              {e.other_requirements.length > 60
+                ? e.other_requirements.slice(0, 60) + '…'
+                : e.other_requirements}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* 「不符合」：標出卡在哪些條件 */}
+      {matchState === 'no' && Array.isArray(matchReasons) && matchReasons.length > 0 && (
+        <p className="mt-2 border-l-2 border-rose-200 pl-2 text-xs text-rose-600">
+          卡在：{matchReasons.map((r) => `${r.label}（${r.reason}）`).join('、')}
         </p>
       )}
     </a>
