@@ -1,0 +1,25 @@
+name: 測試
+
+# 每次 push 與 PR 時執行 matcher 單元測試，避免改壞核心比對邏輯沒被發現。
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安裝相依
+        run: npm ci
+
+      - name: 執行測試
+        run: npm test

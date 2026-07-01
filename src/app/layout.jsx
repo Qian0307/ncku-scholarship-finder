@@ -1,8 +1,30 @@
 import './globals.css';
+import Script from 'next/script';
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, CF_ANALYTICS_TOKEN } from '@/lib/site';
 
 export const metadata = {
-  title: '成大獎助學金查詢',
-  description: '成功大學校內外獎助學金查詢與資格快篩，輕量、公益、免登入。',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    // 各頁若自訂 title 會套用此模板（詳情頁自帶完整標題則直接顯示）
+    template: `%s｜${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  // 分享到 Line／FB 時的預覽卡
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: 'zh_TW',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -43,6 +65,15 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </div>
+
+        {/* Cloudflare Web Analytics：免 cookie、免同意條；未設定 token 則不載入 */}
+        {CF_ANALYTICS_TOKEN && (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            strategy="afterInteractive"
+            data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+          />
+        )}
       </body>
     </html>
   );
