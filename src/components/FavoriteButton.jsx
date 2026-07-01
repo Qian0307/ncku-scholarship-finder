@@ -42,7 +42,7 @@ export default function FavoriteButton({ id, variant = 'card' }) {
       onClick={onClick}
       aria-pressed={active}
       aria-label={active ? '移除收藏' : '加入收藏'}
-      className={`shrink-0 rounded border px-2 py-0.5 text-xs transition ${
+      className={`shrink-0 rounded border px-2 py-1 text-xs transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ncku focus-visible:ring-offset-1 ${
         active
           ? 'border-ncku bg-ncku/10 text-ncku'
           : 'border-slate-300 bg-white text-slate-500 hover:border-ncku hover:text-ncku'

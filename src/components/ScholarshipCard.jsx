@@ -33,18 +33,24 @@ export default function ScholarshipCard({ scholarship, today, matchState, matchR
   const identity = Array.isArray(e.identity) ? e.identity.join('、') : null;
 
   return (
-    <a
-      href={`/scholarship/${scholarship.id}/`}
-      className="block rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-ncku hover:shadow-md"
-    >
+    // stretched-link 模式：整張卡可點，但只有一個真正的連結（標題），
+    // 收藏按鈕以較高 z-index 疊在其上 → 避免「連結內含按鈕」的無效巢狀與無障礙問題。
+    <div className="relative rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-ncku hover:shadow-md">
       {badge && (
         <span className={`mb-1.5 inline-block rounded px-2 py-0.5 text-xs font-medium ${badge.cls}`}>
           {badge.text}
         </span>
       )}
       <div className="flex items-start justify-between gap-3">
-        <h3 className="min-w-0 font-semibold text-slate-900 leading-snug">{scholarship.title}</h3>
-        <div className="flex shrink-0 items-center gap-2">
+        <h3 className="min-w-0 font-semibold text-slate-900 leading-snug">
+          <a
+            href={`/scholarship/${scholarship.id}/`}
+            className="rounded-sm before:absolute before:inset-0 before:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ncku focus-visible:ring-offset-2"
+          >
+            {scholarship.title}
+          </a>
+        </h3>
+        <div className="relative z-10 flex shrink-0 items-center gap-2">
           {scholarship.category && <Chip tone="ncku">{scholarship.category}</Chip>}
           <FavoriteButton id={scholarship.id} />
         </div>
@@ -91,6 +97,6 @@ export default function ScholarshipCard({ scholarship, today, matchState, matchR
           卡在：{matchReasons.map((r) => `${r.label}（${r.reason}）`).join('、')}
         </p>
       )}
-    </a>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import { daysUntil, isExpired } from '@/lib/data';
  */
 export default function DeadlineBadge({ deadline, today }) {
   if (!deadline) {
-    return <span className="text-slate-400">未註明截止日</span>;
+    return <span className="text-slate-500">未註明截止日</span>;
   }
   if (!today) {
     return <span className="text-slate-600">截止 {deadline}</span>;
@@ -17,7 +17,7 @@ export default function DeadlineBadge({ deadline, today }) {
 
   if (expired) {
     return (
-      <span className="inline-flex items-center gap-1 text-slate-400">
+      <span className="inline-flex items-center gap-1 text-slate-500">
         <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">已截止</span>
         {deadline}
       </span>

@@ -394,9 +394,9 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
           >
             <span>
               依我的資格篩選
-              <span className="ml-1 font-normal text-slate-400">（選填，符合度直接標在卡片上）</span>
+              <span className="ml-1 font-normal text-slate-500">（選填，符合度直接標在卡片上）</span>
             </span>
-            <span className="text-slate-400">{condOpen ? '收合' : '展開'}</span>
+            <span className="text-slate-500">{condOpen ? '收合' : '展開'}</span>
           </button>
 
           {condOpen && (
@@ -450,7 +450,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
                     </option>
                   ))}
                 </select>
-                <span className="text-xs text-slate-400">部分獎學金限特定縣市設籍</span>
+                <span className="text-xs text-slate-500">部分獎學金限特定縣市設籍</span>
               </div>
 
               {/* 身分別 */}
@@ -522,7 +522,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
                 )}
               </div>
 
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 只就你填的項目比對，未填項目不設限；含無法自動判讀的條件一律歸「可能符合」，提醒你人工確認。
               </p>
             </div>
@@ -543,7 +543,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
               <span className="text-rose-600">不符合 {counts.no}</span>
             </span>
           )}
-          {!today && <span className="ml-2 text-slate-400">（截止日狀態載入中…）</span>}
+          {!today && <span className="ml-2 text-slate-500">（截止日狀態載入中…）</span>}
         </p>
       </div>
 
@@ -580,7 +580,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
               >
                 <span className="inline-block h-2 w-2 rounded-full bg-rose-400" />
                 不符合 {groups.no.length}
-                <span className="font-normal text-slate-400">（{showNo ? '收合' : '展開看卡在哪些條件'}）</span>
+                <span className="font-normal text-slate-500">（{showNo ? '收合' : '展開看卡在哪些條件'}）</span>
               </button>
               {showNo && <CardGrid list={groups.no} today={today} matchMap={matchMap} className="mt-3" />}
             </div>
@@ -600,7 +600,7 @@ function Section({ title, tone, count, note, children }) {
       <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
         <span className={`inline-block h-2 w-2 rounded-full ${dot}`} />
         {title} {count}
-        {note && <span className="font-normal text-slate-400">（{note}）</span>}
+        {note && <span className="font-normal text-slate-500">（{note}）</span>}
       </div>
       <div className="mt-3">{children}</div>
     </div>

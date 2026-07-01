@@ -47,13 +47,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="zh-Hant">
       <body>
+        {/* 鍵盤使用者可先跳過導覽直達內容；平時隱藏，聚焦時才顯示 */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-ncku focus:shadow"
+        >
+          跳到主要內容
+        </a>
         <div className="min-h-screen flex flex-col">
           <header className="bg-ncku text-white shadow">
-            <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+            <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-4">
               <a href="/" className="flex items-center gap-2">
                 <span className="text-xl font-bold tracking-tight">成大獎助學金查詢</span>
               </a>
-              <nav className="flex items-center gap-4 text-sm">
+              <nav aria-label="主要導覽" className="flex items-center gap-4 text-sm">
                 <a href="/" className="hover:underline underline-offset-4">
                   獎學金列表
                 </a>
@@ -67,7 +74,9 @@ export default function RootLayout({ children }) {
             </div>
           </header>
 
-          <main className="flex-1 mx-auto w-full max-w-5xl px-4 py-6">{children}</main>
+          <main id="main" className="flex-1 mx-auto w-full max-w-5xl px-4 py-6">
+            {children}
+          </main>
 
           <footer className="border-t border-slate-200 bg-white">
             <div className="mx-auto max-w-5xl px-4 py-4 text-xs text-slate-500 leading-relaxed">
@@ -81,7 +90,7 @@ export default function RootLayout({ children }) {
                 成大獎學金系統
               </a>
               ，僅供參考；實際資格與申請辦法請以官方公告為準。
-              {dataUpdatedAt && <span className="ml-1 text-slate-400">（資料更新於 {dataUpdatedAt}）</span>}
+              {dataUpdatedAt && <span className="ml-1 text-slate-500">（資料更新於 {dataUpdatedAt}）</span>}
               <a href="/report/" className="ml-1 text-ncku hover:underline">
                 回報資料有誤
               </a>
