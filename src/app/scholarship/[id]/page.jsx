@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getAllIds, getScholarshipById } from '@/lib/data';
 import { readUnit, readYears } from '@/lib/constants';
+import { SITE_URL } from '@/lib/site';
 import LiveDeadline from '@/components/LiveDeadline';
 import CalendarButton from '@/components/CalendarButton';
 
@@ -11,7 +12,20 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }) {
   const s = getScholarshipById(params.id);
-  return { title: s ? `${s.title}｜成大獎助學金查詢` : '找不到獎學金' };
+  if (!s) return { title: '找不到獎學金' };
+  const desc =
+    `${s.category ?? ''}獎助學金${s.amount ? `，金額 ${s.amount}` : ''}` +
+    `${s.deadline ? `，截止 ${s.deadline}` : ''}。成大獎助學金查詢與資格快篩。`;
+  return {
+    // 標題套用 layout 的 template（自動補「｜成大獎助學金查詢」）
+    title: s.title,
+    description: desc,
+    openGraph: {
+      title: s.title,
+      description: desc,
+      url: `${SITE_URL}/scholarship/${s.id}/`,
+    },
+  };
 }
 
 /** 資格欄位列 */

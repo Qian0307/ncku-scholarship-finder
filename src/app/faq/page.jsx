@@ -1,5 +1,6 @@
 export const metadata = {
-  title: '常見問題與資源｜成大獎助學金查詢',
+  // 標題套用 layout 的 template（自動補「｜成大獎助學金查詢」）
+  title: '常見問題與資源',
   description: '關於本站資料來源、資格快篩判定方式，以及成大獎助學金相關資源連結。',
 };
 
