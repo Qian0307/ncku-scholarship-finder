@@ -264,16 +264,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   const toggleIn = (arr, setArr, v) =>
     setArr(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
 
-  const resetBrowse = () => {
-    setQuery('');
-    setCategory('');
-    setHideExpired(true);
-    setSoonOnly(false);
-    setGeneralOnly(false);
-    setNoGpaOnly(false);
-    setCombineOnly(false);
-  };
-
+  // 清除快篩條件（年級/學院/身分/成績…）
   const clearCond = () => {
     setYear('');
     setCollege('');
@@ -285,6 +276,19 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
     setGpa('');
     setHasOther(false);
     clearProfile();
+  };
+
+  // 「清除篩選」：一次清光所有條件（搜尋、類別、快速條件、以及快篩條件）
+  const resetBrowse = () => {
+    setQuery('');
+    setSearchBody(false);
+    setCategory('');
+    setHideExpired(true);
+    setSoonOnly(false);
+    setGeneralOnly(false);
+    setNoGpaOnly(false);
+    setCombineOnly(false);
+    clearCond();
   };
 
   return (
