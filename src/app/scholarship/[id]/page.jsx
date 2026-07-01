@@ -178,7 +178,7 @@ export default function DetailPage({ params }) {
         <FavoriteButton id={s.id} variant="detail" />
       </div>
 
-      <p className="mt-4 text-xs text-slate-400">
+      <p className="mt-4 text-xs text-slate-500">
         發現這筆資料有誤？
         <a href={buildReportMailto(s)} className="ml-1 text-ncku hover:underline">
           來信回報

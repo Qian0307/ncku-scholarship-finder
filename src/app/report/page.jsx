@@ -28,7 +28,7 @@ export default function ReportPage() {
         >
           用 Email 回報
         </a>
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-xs text-slate-500">
           點按會開啟你的郵件程式（含 Gmail），寄件對象為 {REPORT_EMAIL}。
         </p>
       </div>

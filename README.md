@@ -7,13 +7,18 @@
 
 ## 功能
 
-- **獎學金列表**：關鍵字搜尋、依類別／年級篩選、隱藏已截止、截止日近者優先。
-- **詳情頁**：資格分項、金額、名額、送件方式、應繳文件、申請辦法原文、官方原始連結與**申請表格下載**；無法自動判讀者標示「需人工確認」。
-- **資格快篩**：7 步驟表單（年級 → 學院/系所 → 身分別 → 經濟身分 → 特殊身分 → 成績 → 兼領），即時跑出**三態結果**：
-  - ✅ 符合｜⚠️ 可能符合（需人工確認）｜❌ 不符合（標出卡點）
+- **獎學金列表**：關鍵字搜尋（可含申請條件內文）、依類別／年級篩選、隱藏已截止、只看即將截止（7 天內）、截止日近者優先。
+- **快速條件**：一鍵過濾「一般生可申請／無成績門檻／可兼領」。
+- **資格快篩（內嵌於列表）**：填年級 → 學院/系所 → 身分別 → 經濟身分 → 特殊身分 → 戶籍 → 成績 → 兼領（皆選填，未填＝不設限），即時將結果分成**三態分區**：
+  - ✅ 符合｜⚠️ 可能符合（列出需人工確認的維度與條件原文）｜❌ 不符合（摺疊，並標出**卡在哪些條件**）
   - **保守優先**：任何無法自動判讀的條件一律歸「可能符合」，不誤導學生漏報或白填。
-- **列表個人化**：做過快篩後，profile 存在瀏覽器（localStorage，免登入），回列表時每張卡片直接標示符合度，可一鍵「隱藏不符合」。
+  - 條件存在瀏覽器（localStorage，免登入），回訪與進詳情頁保持一致。
+- **收藏與申請追蹤**：收藏獎學金（`/saved`），依截止日排序、標記「已申請」、一鍵把全部收藏**批次匯出成 `.ics`**。
+- **分享篩選連結**：把目前的快篩條件編碼進網址，一鍵複製分享；開啟帶參數的連結會自動套用。
 - **加入行事曆**：詳情頁可把截止日加進 Google 日曆或下載 `.ics`（含截止前 3 天提醒）。
+- **詳情頁**：資格分項、金額、名額、送件方式、應繳文件、申請辦法原文、官方原始連結與**申請表格下載**；無法自動判讀者標示「需人工確認」，並可**回報資料有誤**。
+- **PWA**：可「加到主畫面」以獨立視窗開啟，離線仍可瀏覽看過的頁面。
+- **回報資料有誤（/report）**：透過 Email 回報，信件自動帶入該筆獎學金資訊。
 - **常見問題（/faq）**：資料來源、快篩判定方式與相關資源連結。
 
 ## 技術
@@ -97,6 +102,16 @@ npm run build        # 產出靜態檔到 out/
 
 > 部署不需要 `GEMINI_API_KEY`；金鑰只在本機跑 pipeline 時使用。
 
+#### 前端環境變數（選填，build 時注入）
+
+| 變數 | 用途 | 預設 |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | sitemap／OG／分享連結的絕對網址（結尾不加斜線） | `https://ncku-scholarship-finder.pages.dev` |
+| `NEXT_PUBLIC_REPORT_EMAIL` | 「回報資料有誤」的收件信箱 | 站長 Gmail |
+| `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token；未設則不載入 | 空 |
+
+> 這些是 `NEXT_PUBLIC_` 變數，於 **build 時**打包進靜態頁面。改動後需**重新部署**才生效。綁定自訂網域後記得更新 `NEXT_PUBLIC_SITE_URL`。
+
 ### 方式 B：直接上傳（Wrangler）
 
 ```bash
@@ -117,12 +132,20 @@ npm run deploy       # = next build + npx wrangler pages deploy out
 │   ├── scholarships.json     # 結構化資料（前端讀這個）
 │   └── _headers              # Cloudflare 快取／安全標頭
 ├── src/
-│   ├── app/                  # 頁面：列表(/)、詳情(/scholarship/[id])、快篩(/quiz)
-│   ├── components/           # ScholarshipBrowser／Card／DeadlineBadge／QuizWizard
+│   ├── app/                  # 頁面：列表(/)、詳情(/scholarship/[id])、收藏(/saved)、
+│   │                         #        FAQ(/faq)、回報(/report)、sitemap/robots/manifest
+│   ├── components/           # ScholarshipBrowser／Card／DeadlineBadge／FavoriteButton／
+│   │                         # SavedList／CalendarButton／PWARegister
 │   └── lib/
 │       ├── data.js           # 資料載入、排序、篩選輔助
+│       ├── data-meta.js      # build 時讀取資料檔更新日期（server-only）
 │       ├── constants.js      # 選項與顯示文字
 │       ├── ncku-units.js     # 學院→系所選單
+│       ├── site.js           # 站台設定（網址、回報信箱、分析 token）
+│       ├── share-url.js      # 分享連結：篩選條件 ↔ 網址參數
+│       ├── favorites-store.js / use-favorites.js  # 收藏（localStorage + 訂閱）
+│       ├── profile-store.js  # 快篩條件本機儲存
+│       ├── calendar.js       # 行事曆事件 / .ics（單筆與批次）
 │       └── matcher/          # 三態比對核心 + 單元測試
 ├── next.config.mjs           # output: 'export'
 ├── wrangler.toml             # Cloudflare Pages 設定

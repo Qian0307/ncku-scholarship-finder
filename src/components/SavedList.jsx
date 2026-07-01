@@ -20,7 +20,7 @@ export default function SavedList({ data }) {
 
   // 掛載前不顯示（靜態輸出階段 favs 為空），避免 hydration 不一致
   if (!mounted) {
-    return <p className="mt-6 text-sm text-slate-400">載入收藏中…</p>;
+    return <p className="mt-6 text-sm text-slate-500">載入收藏中…</p>;
   }
 
   const items = data
