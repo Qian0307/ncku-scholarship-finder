@@ -10,3 +10,25 @@ export const SITE_DESCRIPTION =
 
 // Cloudflare Web Analytics token（在 CF 後台建立 beacon 後填入環境變數；未設定則不載入）
 export const CF_ANALYTICS_TOKEN = process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN || '';
+
+// 資料回報信箱（收「資料有誤」回報的 Gmail）
+export const REPORT_EMAIL = process.env.NEXT_PUBLIC_REPORT_EMAIL || 'cc8576a@gmail.com';
+
+/** 產生「回報資料有誤」的 mailto 連結；帶入該筆獎學金資訊方便對照 */
+export function buildReportMailto(scholarship) {
+  const subject = scholarship
+    ? `【成大獎學金查詢】資料回報：${scholarship.title}`
+    : '【成大獎學金查詢】資料回報';
+  const bodyLines = ['我想回報以下獎學金資料有誤或需更新：', ''];
+  if (scholarship) {
+    bodyLines.push(`名稱：${scholarship.title}`);
+    bodyLines.push(`ID：${scholarship.id}`);
+    bodyLines.push(`頁面：${SITE_URL}/scholarship/${scholarship.id}/`);
+    if (scholarship.source_url) bodyLines.push(`官方原始頁：${scholarship.source_url}`);
+    bodyLines.push('');
+  }
+  bodyLines.push('有誤的欄位與正確內容（請描述）：', '');
+  // 不用 URLSearchParams：它會把空格編成 '+'，在 mailto 內文會顯示成字面加號
+  const query = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+  return `mailto:${REPORT_EMAIL}?${query}`;
+}

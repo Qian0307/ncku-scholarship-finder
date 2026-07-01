@@ -82,6 +82,9 @@ export default function RootLayout({ children }) {
               </a>
               ，僅供參考；實際資格與申請辦法請以官方公告為準。
               {dataUpdatedAt && <span className="ml-1 text-slate-400">（資料更新於 {dataUpdatedAt}）</span>}
+              <a href="/report/" className="ml-1 text-ncku hover:underline">
+                回報資料有誤
+              </a>
             </div>
           </footer>
         </div>

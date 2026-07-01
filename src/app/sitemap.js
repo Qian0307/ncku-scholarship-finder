@@ -8,7 +8,9 @@ export default function sitemap() {
 
   const staticPages = [
     { url: `${SITE_URL}/`, changeFrequency: 'daily', priority: 1 },
+    { url: `${SITE_URL}/saved/`, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/faq/`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${SITE_URL}/report/`, changeFrequency: 'monthly', priority: 0.3 },
   ];
 
   const scholarshipPages = getAllIds().map((id) => ({
