@@ -5,6 +5,7 @@ import ScholarshipCard from './ScholarshipCard';
 import { useFavorites } from '@/lib/use-favorites';
 import { setApplied, clearFavorites } from '@/lib/favorites-store';
 import { compareByDeadline } from '@/lib/data';
+import { buildIcsMulti } from '@/lib/calendar';
 
 /** 我的收藏清單：依截止日近者優先，可標記「已申請」。資料存在瀏覽器本機。 */
 export default function SavedList({ data }) {
@@ -40,6 +41,22 @@ export default function SavedList({ data }) {
   }
 
   const appliedCount = items.filter((i) => i.applied).length;
+  const datedCount = items.filter((i) => i.s.deadline).length;
+
+  const exportAllIcs = () => {
+    const ics = buildIcsMulti(items.map((i) => i.s));
+    if (!ics) {
+      window.alert('收藏中沒有具截止日的獎學金可匯出。');
+      return;
+    }
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '成大獎學金-我的收藏.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div>
@@ -49,15 +66,22 @@ export default function SavedList({ data }) {
           <span className="mx-1 text-slate-300">·</span>
           已標記申請 {appliedCount}
         </span>
-        <button
-          type="button"
-          onClick={() => {
-            if (window.confirm('確定要清空所有收藏嗎？此動作無法復原。')) clearFavorites();
-          }}
-          className="text-slate-500 hover:underline"
-        >
-          清空收藏
-        </button>
+        <div className="flex items-center gap-3">
+          {datedCount > 0 && (
+            <button type="button" onClick={exportAllIcs} className="text-ncku hover:underline">
+              全部匯入行事曆（.ics）
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              if (window.confirm('確定要清空所有收藏嗎？此動作無法復原。')) clearFavorites();
+            }}
+            className="text-slate-500 hover:underline"
+          >
+            清空收藏
+          </button>
+        </div>
       </div>
 
       <div className="mt-3 space-y-3">

@@ -33,6 +33,7 @@ import {
 export default function ScholarshipBrowser({ data, categories, colleges = [], deptsByCollege = {} }) {
   // 一般瀏覽篩選
   const [query, setQuery] = useState('');
+  const [searchBody, setSearchBody] = useState(false); // 搜尋範圍是否含條件內文
   const [category, setCategory] = useState('');
   const [hideExpired, setHideExpired] = useState(true);
   const [soonOnly, setSoonOnly] = useState(false); // 只看 7 天內截止
@@ -55,7 +56,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   const [hasOther, setHasOther] = useState(false);
 
   const [condOpen, setCondOpen] = useState(false);
-  const [matchMode, setMatchMode] = useState('hideNo'); // all | hideNo | onlyYes
+  const [showNo, setShowNo] = useState(false); // 三態分區時「不符合」預設摺疊
 
   // 掛載後才取「今天」與既有快篩 profile（避免靜態輸出與 client 不一致）
   useEffect(() => {
@@ -155,6 +156,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   }, [year, college, department, identities, economic, special, region, gpa, hasOther, personalActive]);
 
   // 只就「已填維度」比對，未填維度不納入（aggregate 會自動忽略）
+  // 存完整結果 { state, reasons } 以便顯示「卡在哪個條件」
   const matchMap = useMemo(() => {
     if (!personalActive) return null;
     const m = new Map();
@@ -169,7 +171,7 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
       if (region) checks.region = checkRegion({ region }, e);
       if (gpaFilled) checks.gpa = checkGpa({ gpa: gpaNum }, e);
       if (hasOther) checks.combine = checkCombine({ hasOtherScholarship: true }, e);
-      m.set(s.id, aggregate(checks, s).state);
+      m.set(s.id, aggregate(checks, s));
     }
     return m;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -179,7 +181,15 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   const browseFiltered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return data.filter((s) => {
-      if (q && !s.title.toLowerCase().includes(q)) return false;
+      if (q) {
+        let hit = s.title.toLowerCase().includes(q);
+        if (!hit && searchBody) {
+          const e = s.eligibility;
+          const body = `${s.raw_text || ''} ${e.other_requirements || ''}`.toLowerCase();
+          hit = body.includes(q);
+        }
+        if (!hit) return false;
+      }
       if (category && s.category !== category) return false;
       if (hideExpired && today && isExpired(s.deadline, today)) return false;
       if (soonOnly && today) {
@@ -196,14 +206,14 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
       if (combineOnly && e.can_combine !== true) return false; // 僅保留明確可兼領者
       return true;
     });
-  }, [data, query, category, hideExpired, soonOnly, generalOnly, noGpaOnly, combineOnly, today]);
+  }, [data, query, searchBody, category, hideExpired, soonOnly, generalOnly, noGpaOnly, combineOnly, today]);
 
   // 在目前瀏覽範圍內的三態統計
   const counts = useMemo(() => {
     if (!matchMap) return null;
     const c = { yes: 0, maybe: 0, no: 0 };
     for (const s of browseFiltered) {
-      const st = matchMap.get(s.id);
+      const st = matchMap.get(s.id)?.state;
       if (st === 'yes') c.yes++;
       else if (st === 'maybe') c.maybe++;
       else c.no++;
@@ -211,32 +221,45 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
     return c;
   }, [matchMap, browseFiltered]);
 
-  // 套用快篩顯示模式 + 排序
-  const filtered = useMemo(() => {
-    let list = browseFiltered;
-    if (matchMap) {
-      list = list.filter((s) => {
-        const st = matchMap.get(s.id);
-        if (matchMode === 'onlyYes') return st === 'yes';
-        if (matchMode === 'hideNo') return st !== 'no';
-        return true;
-      });
-    }
-
+  // 截止日排序：未截止近者優先、無日期次之、已截止最後
+  const sortByDeadline = (list) => {
     if (!today) return list;
-    const t = today;
     const upcoming = [];
     const undated = [];
     const expired = [];
     for (const s of list) {
       if (!s.deadline) undated.push(s);
-      else if (isExpired(s.deadline, t)) expired.push(s);
+      else if (isExpired(s.deadline, today)) expired.push(s);
       else upcoming.push(s);
     }
     upcoming.sort((a, b) => (a.deadline < b.deadline ? -1 : 1));
     expired.sort((a, b) => (a.deadline > b.deadline ? -1 : 1));
     return [...upcoming, ...undated, ...expired];
-  }, [browseFiltered, matchMap, matchMode, today]);
+  };
+
+  // 無快篩時：單一列表；有快篩時：依三態分區
+  const flatList = useMemo(
+    () => (matchMap ? null : sortByDeadline(browseFiltered)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [browseFiltered, matchMap, today]
+  );
+
+  const groups = useMemo(() => {
+    if (!matchMap) return null;
+    const yes = [];
+    const maybe = [];
+    const no = [];
+    for (const s of browseFiltered) {
+      const st = matchMap.get(s.id)?.state;
+      if (st === 'yes') yes.push(s);
+      else if (st === 'maybe') maybe.push(s);
+      else no.push(s);
+    }
+    return { yes: sortByDeadline(yes), maybe: sortByDeadline(maybe), no: sortByDeadline(no) };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [browseFiltered, matchMap, today]);
+
+  const totalCount = matchMap ? groups.yes.length + groups.maybe.length + groups.no.length : flatList.length;
 
   const toggleIn = (arr, setArr, v) =>
     setArr(arr.includes(v) ? arr.filter((x) => x !== v) : [...arr, v]);
@@ -275,6 +298,15 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
           placeholder="搜尋獎學金名稱…"
           className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-ncku focus:ring-1 focus:ring-ncku"
         />
+        <label className="mt-2 flex items-center gap-1.5 text-xs text-slate-500">
+          <input
+            type="checkbox"
+            checked={searchBody}
+            onChange={(e) => setSearchBody(e.target.checked)}
+            className="rounded border-slate-300 text-ncku focus:ring-ncku"
+          />
+          搜尋範圍含申請條件內文（如「僑生」「單親」「清寒」等藏在條文裡的字）
+        </label>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-1.5 text-sm text-slate-600">
             類別
@@ -498,10 +530,10 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
         </div>
       </div>
 
-      {/* 計數 / 三態統計 + 顯示模式 */}
+      {/* 計數 / 三態統計 */}
       <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm text-slate-500">
-          共 <span className="font-semibold text-slate-700">{filtered.length}</span> 筆
+          共 <span className="font-semibold text-slate-700">{totalCount}</span> 筆
           {counts && (
             <span className="ml-2 text-xs">
               <span className="text-emerald-700">符合 {counts.yes}</span>
@@ -513,46 +545,92 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
           )}
           {!today && <span className="ml-2 text-slate-400">（截止日狀態載入中…）</span>}
         </p>
-
-        {personalActive && (
-          <div className="inline-flex overflow-hidden rounded-md border border-slate-300 text-xs">
-            {[
-              ['all', '全部'],
-              ['hideNo', '隱藏不符合'],
-              ['onlyYes', '只看符合'],
-            ].map(([mode, label], i) => (
-              <button
-                key={mode}
-                type="button"
-                onClick={() => setMatchMode(mode)}
-                className={`px-2.5 py-1 ${i > 0 ? 'border-l border-slate-300' : ''} ${
-                  matchMode === mode ? 'bg-ncku text-white' : 'bg-white text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
-      {/* 列表 */}
-      {filtered.length === 0 ? (
-        <div className="mt-8 rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
-          沒有符合條件的獎學金，試著放寬篩選。
-        </div>
+      {/* 列表：無快篩時單一列表；有快篩時依三態分區 */}
+      {!matchMap ? (
+        flatList.length === 0 ? (
+          <EmptyHint />
+        ) : (
+          <CardGrid list={flatList} today={today} />
+        )
+      ) : totalCount === 0 ? (
+        <EmptyHint />
       ) : (
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {filtered.map((s) => (
-            <ScholarshipCard
-              key={s.id}
-              scholarship={s}
-              today={today}
-              matchState={matchMap ? matchMap.get(s.id) : null}
-            />
-          ))}
+        <div className="mt-3 space-y-6">
+          <Section title="符合" tone="yes" count={groups.yes.length}>
+            <CardGrid list={groups.yes} today={today} matchMap={matchMap} />
+          </Section>
+          <Section
+            title="可能符合"
+            tone="maybe"
+            count={groups.maybe.length}
+            note="含無法自動判讀的條件，請人工確認"
+          >
+            <CardGrid list={groups.maybe} today={today} matchMap={matchMap} />
+          </Section>
+
+          {groups.no.length > 0 && (
+            <div>
+              <button
+                type="button"
+                onClick={() => setShowNo((v) => !v)}
+                aria-expanded={showNo}
+                className="flex w-full items-center gap-2 border-t border-slate-200 pt-4 text-left text-sm font-medium text-slate-500 hover:text-slate-700"
+              >
+                <span className="inline-block h-2 w-2 rounded-full bg-rose-400" />
+                不符合 {groups.no.length}
+                <span className="font-normal text-slate-400">（{showNo ? '收合' : '展開看卡在哪些條件'}）</span>
+              </button>
+              {showNo && <CardGrid list={groups.no} today={today} matchMap={matchMap} className="mt-3" />}
+            </div>
+          )}
         </div>
       )}
+    </div>
+  );
+}
+
+/** 三態分區標頭 */
+function Section({ title, tone, count, note, children }) {
+  if (count === 0) return null;
+  const dot = { yes: 'bg-emerald-500', maybe: 'bg-amber-400' }[tone] || 'bg-slate-400';
+  return (
+    <div>
+      <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
+        <span className={`inline-block h-2 w-2 rounded-full ${dot}`} />
+        {title} {count}
+        {note && <span className="font-normal text-slate-400">（{note}）</span>}
+      </div>
+      <div className="mt-3">{children}</div>
+    </div>
+  );
+}
+
+/** 卡片格線 */
+function CardGrid({ list, today, matchMap = null, className = '' }) {
+  return (
+    <div className={`grid gap-3 sm:grid-cols-2 ${className}`}>
+      {list.map((s) => {
+        const r = matchMap ? matchMap.get(s.id) : null;
+        return (
+          <ScholarshipCard
+            key={s.id}
+            scholarship={s}
+            today={today}
+            matchState={r ? r.state : null}
+            matchReasons={r ? r.reasons : null}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function EmptyHint() {
+  return (
+    <div className="mt-8 rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+      沒有符合條件的獎學金，試著放寬篩選。
     </div>
   );
 }

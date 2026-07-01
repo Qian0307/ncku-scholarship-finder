@@ -28,16 +28,11 @@ export function googleCalUrl(s) {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-/** 產生 .ics 檔內容（含截止前 3 天提醒） */
-export function buildIcs(s) {
-  if (!s.deadline) return null;
-  const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-  const esc = (t) => String(t).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
+const esc = (t) => String(t).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
+
+/** 單一 VEVENT（含截止前 3 天提醒） */
+function buildVevent(s, stamp) {
   return [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//NCKU Scholarship Finder//ZH-TW//',
-    'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
     `UID:${s.id}@ncku-scholarship`,
     `DTSTAMP:${stamp}`,
@@ -51,6 +46,31 @@ export function buildIcs(s) {
     'DESCRIPTION:獎學金申請截止前 3 天提醒',
     'END:VALARM',
     'END:VEVENT',
+  ];
+}
+
+function wrapCalendar(lines) {
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//NCKU Scholarship Finder//ZH-TW//',
+    'CALSCALE:GREGORIAN',
+    ...lines,
     'END:VCALENDAR',
   ].join('\r\n');
+}
+
+/** 產生單筆 .ics 檔內容（含截止前 3 天提醒） */
+export function buildIcs(s) {
+  if (!s.deadline) return null;
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  return wrapCalendar(buildVevent(s, stamp));
+}
+
+/** 產生多筆 .ics 檔內容；自動略過無截止日者。全無截止日時回傳 null */
+export function buildIcsMulti(list) {
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  const events = list.filter((s) => s.deadline).flatMap((s) => buildVevent(s, stamp));
+  if (events.length === 0) return null;
+  return wrapCalendar(events);
 }

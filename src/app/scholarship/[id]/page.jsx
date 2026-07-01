@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getAllIds, getScholarshipById } from '@/lib/data';
 import { readUnit, readYears } from '@/lib/constants';
-import { SITE_URL } from '@/lib/site';
+import { SITE_URL, buildReportMailto } from '@/lib/site';
 import LiveDeadline from '@/components/LiveDeadline';
 import CalendarButton from '@/components/CalendarButton';
 import FavoriteButton from '@/components/FavoriteButton';
@@ -177,6 +177,13 @@ export default function DetailPage({ params }) {
         <CalendarButton scholarship={s} />
         <FavoriteButton id={s.id} variant="detail" />
       </div>
+
+      <p className="mt-4 text-xs text-slate-400">
+        發現這筆資料有誤？
+        <a href={buildReportMailto(s)} className="ml-1 text-ncku hover:underline">
+          來信回報
+        </a>
+      </p>
     </article>
   );
 }
