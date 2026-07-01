@@ -89,6 +89,12 @@ https://<PROJECT_REF>.supabase.co/auth/v1/callback
 
 3. **Cloudflare Pages（正式站）**：專案 **Settings → Environment variables**，在 **Production**（建議 Preview 也加）新增這兩個變數 → **儲存後重新部署一次**。
 
+> ⚠️ **常見雷：`NEXT_PUBLIC_` 變數是 build 時打包的。**
+> 加了變數之後，必須讓 Cloudflare **用新變數重新 build 一次**才會生效。
+> 「Retry deployment」若重跑的是**舊的部署**，會用舊環境重建、不含新變數。
+> 最可靠的做法：**推一個新 commit 到 `main`**（觸發全新部署），或在 Deployments 對**最新一筆**重新部署。
+> 驗證是否生效：開正式站 → 右上角出現「登入」即成功。
+
    > `NEXT_PUBLIC_` 是 **build 時**注入，不重新 build 不會生效。
 
 ## Part F — 測試
