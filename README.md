@@ -196,7 +196,7 @@ npm run deploy       # = next build + npx wrangler pages deploy out
 
 登入（Google）後，收藏與快篩條件會存到雲端並跨裝置自動合併。**不設定也能用**——未提供下列環境變數時，登入 UI 隱藏、一切維持純本機（localStorage）。採 Supabase 客戶端直連 + Row-Level Security，**不需自建後端**，可續留 Cloudflare Pages 靜態部署。
 
-設定步驟：
+設定步驟（**完整圖文流程見 [`docs/supabase-setup.md`](docs/supabase-setup.md)**）：
 
 1. 建立 [Supabase](https://supabase.com) 專案。
 2. **SQL Editor** 貼上並執行 [`supabase/schema.sql`](supabase/schema.sql)（建立 `user_data` 表與 RLS）。
