@@ -4,6 +4,7 @@ import { readUnit, readYears } from '@/lib/constants';
 import { SITE_URL } from '@/lib/site';
 import LiveDeadline from '@/components/LiveDeadline';
 import CalendarButton from '@/components/CalendarButton';
+import FavoriteButton from '@/components/FavoriteButton';
 
 // 靜態輸出：預先產生每一筆詳情頁
 export function generateStaticParams() {
@@ -174,6 +175,7 @@ export default function DetailPage({ params }) {
           </a>
         )}
         <CalendarButton scholarship={s} />
+        <FavoriteButton id={s.id} variant="detail" />
       </div>
     </article>
   );

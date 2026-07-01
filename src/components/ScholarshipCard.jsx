@@ -1,4 +1,5 @@
 import DeadlineBadge from './DeadlineBadge';
+import FavoriteButton from './FavoriteButton';
 import { readYears } from '@/lib/constants';
 
 /** 小標籤 */
@@ -43,7 +44,10 @@ export default function ScholarshipCard({ scholarship, today, matchState }) {
       )}
       <div className="flex items-start justify-between gap-3">
         <h3 className="min-w-0 font-semibold text-slate-900 leading-snug">{scholarship.title}</h3>
-        {scholarship.category && <Chip tone="ncku">{scholarship.category}</Chip>}
+        <div className="flex shrink-0 items-center gap-2">
+          {scholarship.category && <Chip tone="ncku">{scholarship.category}</Chip>}
+          <FavoriteButton id={scholarship.id} />
+        </div>
       </div>
 
       <div className="mt-2 text-sm">

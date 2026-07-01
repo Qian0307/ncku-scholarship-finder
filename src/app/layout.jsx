@@ -41,6 +41,9 @@ export default function RootLayout({ children }) {
                 <a href="/" className="hover:underline underline-offset-4">
                   獎學金列表
                 </a>
+                <a href="/saved/" className="hover:underline underline-offset-4">
+                  我的收藏
+                </a>
                 <a href="/faq/" className="hover:underline underline-offset-4">
                   常見問題
                 </a>
