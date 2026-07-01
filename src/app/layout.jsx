@@ -1,6 +1,8 @@
 import './globals.css';
 import Script from 'next/script';
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, CF_ANALYTICS_TOKEN } from '@/lib/site';
+import { getDataUpdatedAt } from '@/lib/data-meta';
+import PWARegister from '@/components/PWARegister';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -25,9 +27,23 @@ export const metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
   },
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: 'default',
+  },
+};
+
+export const viewport = {
+  themeColor: '#8a1538',
 };
 
 export default function RootLayout({ children }) {
+  const dataUpdatedAt = getDataUpdatedAt();
   return (
     <html lang="zh-Hant">
       <body>
@@ -40,6 +56,9 @@ export default function RootLayout({ children }) {
               <nav className="flex items-center gap-4 text-sm">
                 <a href="/" className="hover:underline underline-offset-4">
                   獎學金列表
+                </a>
+                <a href="/saved/" className="hover:underline underline-offset-4">
+                  我的收藏
                 </a>
                 <a href="/faq/" className="hover:underline underline-offset-4">
                   常見問題
@@ -62,9 +81,12 @@ export default function RootLayout({ children }) {
                 成大獎學金系統
               </a>
               ，僅供參考；實際資格與申請辦法請以官方公告為準。
+              {dataUpdatedAt && <span className="ml-1 text-slate-400">（資料更新於 {dataUpdatedAt}）</span>}
             </div>
           </footer>
         </div>
+
+        <PWARegister />
 
         {/* Cloudflare Web Analytics：免 cookie、免同意條；未設定 token 則不載入 */}
         {CF_ANALYTICS_TOKEN && (

@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import ScholarshipCard from './ScholarshipCard';
-import { isExpired } from '@/lib/data';
+import { isExpired, daysUntil } from '@/lib/data';
+import { encodeFilters, decodeFilters, hasFilterParams } from '@/lib/share-url';
 import {
   YEAR_OPTIONS,
   IDENTITY_OPTIONS,
@@ -34,7 +35,13 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
   const [hideExpired, setHideExpired] = useState(true);
+  const [soonOnly, setSoonOnly] = useState(false); // 只看 7 天內截止
+  // 快速條件（依辦法欄位直接過濾，與下方逐維度快篩獨立）
+  const [generalOnly, setGeneralOnly] = useState(false); // 一般生可申請
+  const [noGpaOnly, setNoGpaOnly] = useState(false); // 無成績門檻
+  const [combineOnly, setCombineOnly] = useState(false); // 可兼領
   const [today, setToday] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   // 內嵌快篩條件（皆為選填；未填 = 不設限）
   const [year, setYear] = useState('');
@@ -53,6 +60,26 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   // 掛載後才取「今天」與既有快篩 profile（避免靜態輸出與 client 不一致）
   useEffect(() => {
     setToday(new Date());
+
+    // 網址帶篩選參數（分享連結）優先於本機 profile
+    const params = new URLSearchParams(window.location.search);
+    if (hasFilterParams(params)) {
+      const d = decodeFilters(params);
+      if (d.query) setQuery(d.query);
+      if (d.category) setCategory(d.category);
+      if (d.year) setYear(d.year);
+      if (d.college) setCollege(d.college);
+      if (d.department) setDepartment(d.department);
+      if (d.identities) setIdentities(d.identities);
+      if (d.economic) setEconomic(d.economic);
+      if (d.special) setSpecial(d.special);
+      if (d.region) setRegion(d.region);
+      if (d.gpa) setGpa(d.gpa);
+      if (d.hasOther) setHasOther(true);
+      setCondOpen(true);
+      return;
+    }
+
     const p = loadProfile();
     if (p) {
       setYear(p.year || '');
@@ -67,6 +94,31 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
       setCondOpen(true);
     }
   }, []);
+
+  // 複製目前篩選條件的分享連結
+  const copyShareLink = async () => {
+    const qs = encodeFilters({
+      query,
+      category,
+      year,
+      college,
+      department,
+      identities,
+      economic,
+      special,
+      region,
+      gpa,
+      hasOther,
+    });
+    const url = window.location.origin + window.location.pathname + (qs ? `?${qs}` : '');
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.prompt('複製此連結分享：', url);
+    }
+  };
 
   const gpaNum = gpa === '' ? null : Number(gpa);
   const gpaFilled = gpaNum != null && !Number.isNaN(gpaNum);
@@ -130,9 +182,21 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
       if (q && !s.title.toLowerCase().includes(q)) return false;
       if (category && s.category !== category) return false;
       if (hideExpired && today && isExpired(s.deadline, today)) return false;
+      if (soonOnly && today) {
+        const d = daysUntil(s.deadline, today);
+        if (d == null || d < 0 || d > 7) return false; // 僅保留 7 天內尚未截止者
+      }
+      const e = s.eligibility;
+      if (generalOnly) {
+        // 不限身分，或明確含「本國生」＝一般生可申請
+        const ok = e.identity === 'all' || (Array.isArray(e.identity) && e.identity.includes('本國生'));
+        if (!ok) return false;
+      }
+      if (noGpaOnly && e.gpa_min !== 0) return false; // 僅保留明確「無成績門檻」者
+      if (combineOnly && e.can_combine !== true) return false; // 僅保留明確可兼領者
       return true;
     });
-  }, [data, query, category, hideExpired, today]);
+  }, [data, query, category, hideExpired, soonOnly, generalOnly, noGpaOnly, combineOnly, today]);
 
   // 在目前瀏覽範圍內的三態統計
   const counts = useMemo(() => {
@@ -181,6 +245,10 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
     setQuery('');
     setCategory('');
     setHideExpired(true);
+    setSoonOnly(false);
+    setGeneralOnly(false);
+    setNoGpaOnly(false);
+    setCombineOnly(false);
   };
 
   const clearCond = () => {
@@ -250,9 +318,38 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
             隱藏已截止
           </label>
 
-          <button onClick={resetBrowse} className="ml-auto text-sm text-ncku hover:underline">
-            清除篩選
-          </button>
+          <label className="flex items-center gap-1.5 text-sm text-slate-600">
+            <input
+              type="checkbox"
+              checked={soonOnly}
+              onChange={(e) => setSoonOnly(e.target.checked)}
+              className="rounded border-slate-300 text-ncku focus:ring-ncku"
+            />
+            只看即將截止（7 天內）
+          </label>
+
+          <div className="ml-auto flex items-center gap-3">
+            <button onClick={copyShareLink} className="text-sm text-ncku hover:underline">
+              {copied ? '連結已複製' : '複製篩選連結'}
+            </button>
+            <button onClick={resetBrowse} className="text-sm text-slate-500 hover:underline">
+              清除篩選
+            </button>
+          </div>
+        </div>
+
+        {/* 快速條件（一鍵過濾常見門檻，與下方逐維度快篩獨立） */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="text-sm text-slate-500">快速條件</span>
+          <Toggle active={generalOnly} onClick={() => setGeneralOnly((v) => !v)}>
+            一般生可申請
+          </Toggle>
+          <Toggle active={noGpaOnly} onClick={() => setNoGpaOnly((v) => !v)}>
+            無成績門檻
+          </Toggle>
+          <Toggle active={combineOnly} onClick={() => setCombineOnly((v) => !v)}>
+            可兼領
+          </Toggle>
         </div>
 
         {/* 內嵌資格快篩 */}
