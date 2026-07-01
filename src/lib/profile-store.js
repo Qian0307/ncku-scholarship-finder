@@ -2,6 +2,17 @@
 
 const PROFILE_KEY = 'ncku_quiz_profile_v1';
 
+const listeners = new Set();
+function notify() {
+  listeners.forEach((l) => l());
+}
+
+/** 訂閱 profile 變動（雲端同步用）；回傳取消訂閱函式 */
+export function subscribeProfile(listener) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
 export function loadProfile() {
   if (typeof window === 'undefined') return null;
   try {
@@ -16,6 +27,7 @@ export function saveProfile(profile) {
   if (typeof window === 'undefined') return;
   try {
     window.localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    notify();
   } catch {
     /* 忽略（隱私模式等） */
   }
@@ -25,6 +37,7 @@ export function clearProfile() {
   if (typeof window === 'undefined') return;
   try {
     window.localStorage.removeItem(PROFILE_KEY);
+    notify();
   } catch {
     /* 忽略 */
   }
