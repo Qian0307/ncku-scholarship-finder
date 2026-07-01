@@ -36,6 +36,10 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
   const [category, setCategory] = useState('');
   const [hideExpired, setHideExpired] = useState(true);
   const [soonOnly, setSoonOnly] = useState(false); // 只看 7 天內截止
+  // 快速條件（依辦法欄位直接過濾，與下方逐維度快篩獨立）
+  const [generalOnly, setGeneralOnly] = useState(false); // 一般生可申請
+  const [noGpaOnly, setNoGpaOnly] = useState(false); // 無成績門檻
+  const [combineOnly, setCombineOnly] = useState(false); // 可兼領
   const [today, setToday] = useState(null);
   const [copied, setCopied] = useState(false);
 
@@ -182,9 +186,17 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
         const d = daysUntil(s.deadline, today);
         if (d == null || d < 0 || d > 7) return false; // 僅保留 7 天內尚未截止者
       }
+      const e = s.eligibility;
+      if (generalOnly) {
+        // 不限身分，或明確含「本國生」＝一般生可申請
+        const ok = e.identity === 'all' || (Array.isArray(e.identity) && e.identity.includes('本國生'));
+        if (!ok) return false;
+      }
+      if (noGpaOnly && e.gpa_min !== 0) return false; // 僅保留明確「無成績門檻」者
+      if (combineOnly && e.can_combine !== true) return false; // 僅保留明確可兼領者
       return true;
     });
-  }, [data, query, category, hideExpired, soonOnly, today]);
+  }, [data, query, category, hideExpired, soonOnly, generalOnly, noGpaOnly, combineOnly, today]);
 
   // 在目前瀏覽範圍內的三態統計
   const counts = useMemo(() => {
@@ -233,6 +245,10 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
     setQuery('');
     setCategory('');
     setHideExpired(true);
+    setSoonOnly(false);
+    setGeneralOnly(false);
+    setNoGpaOnly(false);
+    setCombineOnly(false);
   };
 
   const clearCond = () => {
@@ -320,6 +336,20 @@ export default function ScholarshipBrowser({ data, categories, colleges = [], de
               清除篩選
             </button>
           </div>
+        </div>
+
+        {/* 快速條件（一鍵過濾常見門檻，與下方逐維度快篩獨立） */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="text-sm text-slate-500">快速條件</span>
+          <Toggle active={generalOnly} onClick={() => setGeneralOnly((v) => !v)}>
+            一般生可申請
+          </Toggle>
+          <Toggle active={noGpaOnly} onClick={() => setNoGpaOnly((v) => !v)}>
+            無成績門檻
+          </Toggle>
+          <Toggle active={combineOnly} onClick={() => setCombineOnly((v) => !v)}>
+            可兼領
+          </Toggle>
         </div>
 
         {/* 內嵌資格快篩 */}

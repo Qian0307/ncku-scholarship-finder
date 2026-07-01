@@ -2,6 +2,7 @@ import './globals.css';
 import Script from 'next/script';
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, CF_ANALYTICS_TOKEN } from '@/lib/site';
 import { getDataUpdatedAt } from '@/lib/data-meta';
+import PWARegister from '@/components/PWARegister';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -26,6 +27,19 @@ export const metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
   },
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: 'default',
+  },
+};
+
+export const viewport = {
+  themeColor: '#8a1538',
 };
 
 export default function RootLayout({ children }) {
@@ -71,6 +85,8 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </div>
+
+        <PWARegister />
 
         {/* Cloudflare Web Analytics：免 cookie、免同意條；未設定 token 則不載入 */}
         {CF_ANALYTICS_TOKEN && (
