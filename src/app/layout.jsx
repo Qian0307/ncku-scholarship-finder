@@ -3,6 +3,8 @@ import Script from 'next/script';
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, CF_ANALYTICS_TOKEN } from '@/lib/site';
 import { getDataUpdatedAt } from '@/lib/data-meta';
 import PWARegister from '@/components/PWARegister';
+import AuthProvider from '@/components/AuthProvider';
+import AuthButton from '@/components/AuthButton';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -57,6 +59,7 @@ export default function RootLayout({ children }) {
         >
           跳到主要內容
         </a>
+        <AuthProvider>
         <div className="min-h-screen flex flex-col">
           <header className="bg-ncku text-white shadow">
             <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-4">
@@ -73,6 +76,7 @@ export default function RootLayout({ children }) {
                 <a href="/faq/" className="hover:underline underline-offset-4">
                   常見問題
                 </a>
+                <AuthButton />
               </nav>
             </div>
           </header>
@@ -100,6 +104,7 @@ export default function RootLayout({ children }) {
             </div>
           </footer>
         </div>
+        </AuthProvider>
 
         <PWARegister />
 

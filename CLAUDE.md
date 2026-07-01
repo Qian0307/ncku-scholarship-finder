@@ -113,7 +113,11 @@ npm run build            # 靜態輸出（Cloudflare Pages）
 
 ## 暫時不要做
 
-登入 / 資料庫 / 後台編輯 / 寄信 / Line / SerpApi。這些等 v1 跑順再說。
+後台編輯 / 寄信 / Line / SerpApi。這些等之後再說。
+
+> 更新：**登入與跨裝置同步已納入**（Google 登入 + Supabase，客戶端直連 + RLS，不自建後端）。
+> 為「選用」功能：未設定 `NEXT_PUBLIC_SUPABASE_*` 時登入 UI 隱藏、維持純本機模式，不影響靜態部署。
+> 相關檔案：`src/lib/supabase.js`、`src/lib/sync.js`、`src/components/AuthProvider.jsx`、`supabase/schema.sql`。
 
 ---
 

@@ -109,6 +109,8 @@ npm run build        # 產出靜態檔到 out/
 | `NEXT_PUBLIC_SITE_URL` | sitemap／OG／分享連結的絕對網址（結尾不加斜線） | `https://ncku-scholarship-finder.pages.dev` |
 | `NEXT_PUBLIC_REPORT_EMAIL` | 「回報資料有誤」的收件信箱 | 站長 Gmail |
 | `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token；未設則不載入 | 空 |
+| `NEXT_PUBLIC_SUPABASE_URL` | 帳號與跨裝置同步（Supabase）；未設則停用登入 | 空 |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon public key | 空 |
 
 > 這些是 `NEXT_PUBLIC_` 變數，於 **build 時**打包進靜態頁面。改動後需**重新部署**才生效。綁定自訂網域後記得更新 `NEXT_PUBLIC_SITE_URL`。
 
@@ -189,6 +191,20 @@ npm run deploy       # = next build + npx wrangler pages deploy out
 ```
 
 **哨符約定**：`"all"`／`"無限制"` = 明確不限（該維度 pass）；`null` = 無法判讀（該維度 unknown → ⚠️）。兩者意義不同。
+
+## 帳號與跨裝置同步（選用，Supabase）
+
+登入（Google）後，收藏與快篩條件會存到雲端並跨裝置自動合併。**不設定也能用**——未提供下列環境變數時，登入 UI 隱藏、一切維持純本機（localStorage）。採 Supabase 客戶端直連 + Row-Level Security，**不需自建後端**，可續留 Cloudflare Pages 靜態部署。
+
+設定步驟（**完整圖文流程見 [`docs/supabase-setup.md`](docs/supabase-setup.md)**）：
+
+1. 建立 [Supabase](https://supabase.com) 專案。
+2. **SQL Editor** 貼上並執行 [`supabase/schema.sql`](supabase/schema.sql)（建立 `user_data` 表與 RLS）。
+3. **Authentication → Providers → Google** 啟用，填入 Google OAuth 用戶端 ID／密鑰（於 Google Cloud Console 建立 OAuth 憑證；授權導向 URI 填 `https://<你的網域>` 與 Supabase 提供的 callback）。
+4. **Authentication → URL Configuration** 的 Site URL／Redirect URLs 加入你的正式網域（與本機 `http://localhost:3000`）。
+5. **Settings → API** 取得 `Project URL` 與 `anon public` key，設為 `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_ANON_KEY`（本機放 `.env.local`；Cloudflare Pages 放環境變數）後重新部署。
+
+> anon key 是設計為可公開於前端的金鑰；真正的資料隔離靠 RLS。切勿把 `service_role` key 放進前端。
 
 ## 授權與免責
 

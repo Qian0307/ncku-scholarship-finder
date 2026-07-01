@@ -93,3 +93,8 @@ export function setApplied(id, applied) {
 export function clearFavorites() {
   write({});
 }
+
+/** 以整份 map 覆寫（雲端同步 merge 後回寫用） */
+export function setAllFavorites(map) {
+  write({ ...map });
+}
