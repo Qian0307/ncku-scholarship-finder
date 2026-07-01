@@ -3,8 +3,9 @@
 // 登入相關 UI 一律隱藏，既有功能不受影響。
 import { createClient } from '@supabase/supabase-js';
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// trim：防止 .env 用 Windows 換行(CRLF)時，值尾帶 \r 導致網址/金鑰失效
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
 
 export const isSupabaseConfigured = Boolean(url && anon);
 

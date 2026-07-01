@@ -28,12 +28,15 @@ export default function AuthProvider({ children }) {
       return;
     }
 
-    supabase.auth.getSession().then(({ data }) => {
-      const u = data.session?.user ?? null;
-      userRef.current = u;
-      setUser(u);
-      setLoading(false);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data }) => {
+        const u = data.session?.user ?? null;
+        userRef.current = u;
+        setUser(u);
+      })
+      .catch((e) => console.warn('[auth] getSession 失敗：', e?.message))
+      .finally(() => setLoading(false)); // 無論成敗都結束載入，避免登入鈕永遠隱藏
 
     const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
       const u = session?.user ?? null;
