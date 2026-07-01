@@ -12,12 +12,12 @@ export default function manifest() {
     theme_color: '#8a1538',
     lang: 'zh-Hant',
     icons: [
-      {
-        src: '/icon.svg',
-        sizes: 'any',
-        type: 'image/svg+xml',
-        purpose: 'any maskable',
-      },
+      // PNG 供 Android Chrome 判定可安裝（需 192 與 512）
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      // SVG 供支援的瀏覽器（清晰任意尺寸）
+      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
     ],
   };
 }

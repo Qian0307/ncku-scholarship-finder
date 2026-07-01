@@ -10,7 +10,8 @@ function Chip({ children, tone = 'slate' }) {
     amber: 'bg-amber-100 text-amber-700',
   };
   return (
-    <span className={`shrink-0 whitespace-nowrap rounded px-2 py-0.5 text-xs ${tones[tone]}`}>
+    // 不用 whitespace-nowrap／shrink-0：身分別等長標籤在窄螢幕需可換行，否則會把卡片撐爆
+    <span className={`inline-block max-w-full break-words rounded px-2 py-0.5 text-xs ${tones[tone]}`}>
       {children}
     </span>
   );
@@ -35,7 +36,7 @@ export default function ScholarshipCard({ scholarship, today, matchState, matchR
   return (
     // stretched-link 模式：整張卡可點，但只有一個真正的連結（標題），
     // 收藏按鈕以較高 z-index 疊在其上 → 避免「連結內含按鈕」的無效巢狀與無障礙問題。
-    <div className="relative rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-ncku hover:shadow-md">
+    <div className="relative min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-ncku hover:shadow-md">
       {badge && (
         <span className={`mb-1.5 inline-block rounded px-2 py-0.5 text-xs font-medium ${badge.cls}`}>
           {badge.text}
@@ -73,7 +74,7 @@ export default function ScholarshipCard({ scholarship, today, matchState, matchR
 
       {/* 「可能符合」：列出需人工確認的維度與條件原文 */}
       {matchState === 'maybe' && (
-        <div className="mt-2 space-y-0.5 border-l-2 border-amber-200 pl-2 text-xs text-amber-700">
+        <div className="mt-2 space-y-0.5 break-words border-l-2 border-amber-200 pl-2 text-xs text-amber-700">
           {Array.isArray(matchReasons) &&
             matchReasons.map((r) => (
               <p key={r.dim}>
@@ -93,7 +94,7 @@ export default function ScholarshipCard({ scholarship, today, matchState, matchR
 
       {/* 「不符合」：標出卡在哪些條件 */}
       {matchState === 'no' && Array.isArray(matchReasons) && matchReasons.length > 0 && (
-        <p className="mt-2 border-l-2 border-rose-200 pl-2 text-xs text-rose-600">
+        <p className="mt-2 break-words border-l-2 border-rose-200 pl-2 text-xs text-rose-600">
           卡在：{matchReasons.map((r) => `${r.label}（${r.reason}）`).join('、')}
         </p>
       )}

@@ -10,6 +10,7 @@
     "start": "next start",
     "scrape": "node scripts/scraper.mjs",
     "parse": "node scripts/parser.mjs",
+    "gen:icons": "node scripts/gen-icons.mjs",
     "test": "node --test src/lib/matcher/",
     "deploy": "npm run build && npx wrangler pages deploy out"
   },
