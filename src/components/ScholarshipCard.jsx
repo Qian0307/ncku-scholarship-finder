@@ -64,6 +64,16 @@ export default function ScholarshipCard({ scholarship, today, matchState }) {
         {scholarship.quota && scholarship.quota !== '不定' && <Chip>名額 {scholarship.quota}</Chip>}
         {scholarship.needs_review && <Chip tone="amber">部分條件需確認</Chip>}
       </div>
+
+      {/* 「可能符合」時，把無法自動判讀的條件原文顯示出來，方便自行判斷 */}
+      {matchState === 'maybe' && e.other_requirements && (
+        <p className="mt-2 border-l-2 border-amber-200 pl-2 text-xs text-amber-700">
+          需確認：
+          {e.other_requirements.length > 60
+            ? e.other_requirements.slice(0, 60) + '…'
+            : e.other_requirements}
+        </p>
+      )}
     </a>
   );
 }

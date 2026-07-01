@@ -1,6 +1,7 @@
 import './globals.css';
 import Script from 'next/script';
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, CF_ANALYTICS_TOKEN } from '@/lib/site';
+import { getDataUpdatedAt } from '@/lib/data-meta';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -28,6 +29,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const dataUpdatedAt = getDataUpdatedAt();
   return (
     <html lang="zh-Hant">
       <body>
@@ -65,6 +67,7 @@ export default function RootLayout({ children }) {
                 成大獎學金系統
               </a>
               ，僅供參考；實際資格與申請辦法請以官方公告為準。
+              {dataUpdatedAt && <span className="ml-1 text-slate-400">（資料更新於 {dataUpdatedAt}）</span>}
             </div>
           </footer>
         </div>
