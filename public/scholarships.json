@@ -663,6 +663,46 @@
     "needs_review": false
   },
   {
+    "id": "a3595-102",
+    "title": "臺南市政府-原住民學生獎助學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a3595-102",
+    "category": "政府",
+    "deadline": "2026-09-30",
+    "amount": "每名5,000元",
+    "quota": "全國50名",
+    "apply_docs": "1.欲申請本項獎學金者，請於申請期限前，逕向所屬戶籍所在地區公所提出申請。 2.相關申請辦法及申請表格，請參閱網址https://web.tainan.gov.tw/Nation/News.aspx?n=919&sms=9713。",
+    "submit_methods": null,
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "大一",
+        "大二",
+        "大三",
+        "大四"
+      ],
+      "colleges": "all",
+      "departments": "all",
+      "identity": [
+        "原住民"
+      ],
+      "economic_status": [
+        "無限制"
+      ],
+      "special_conditions": null,
+      "region": [
+        "台南市"
+      ],
+      "region_extra": true,
+      "region_raw": "設籍台南市六個月以上",
+      "gpa_min": 75,
+      "conduct_note": "操行成績需達 60 分",
+      "other_requirements": "不含進修推廣、在職專班、研究所\n如有參加相關原住民服務、族語活動並有證明者，優先錄取。",
+      "can_combine": true
+    },
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：具有原住民身分\n身份限制：不含進修推廣、在職專班、研究所\n其他條件：如有參加相關原住民服務、族語活動並有證明者，優先錄取。\n區域條件：設籍台南市六個月以上\n應繳文件：1.欲申請本項獎學金者，請於申請期限前，逕向所屬戶籍所在地區公所提出申請。 2.相關申請辦法及申請表格，請參閱網址https://web.tainan.gov.tw/Nation/News.aspx?n=919&sms=9713。",
+    "needs_review": false
+  },
+  {
     "id": "a16115-030",
     "title": "新應材股份有限公司-獎學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a16115-030",
@@ -5341,46 +5381,6 @@
       "can_combine": false
     },
     "raw_text": "系所條件：不限\n身份條件(家庭狀況)：低收入戶\n其他條件：具有低收入戶身分\n區域條件：設籍桃園市六個月以上\n應繳文件：1.申請書(請至網址 https://drive.google.com/drive/folders/1oQrApT9DZOqOcpej5DYTGa-x64LJdITk?usp=sharing 下載申請書 )。 2.在學證明(請至註冊組申請)。 3.成績單乙份。 4.3個月內戶籍謄本1份(應在本縣設籍6個月以上)。 5.低收入戶證明(有效日期)。\n注意事項：1. 僅減免註冊相關費用或申請學產基金者仍可申請。 2. 獎學金與助學金僅可擇優一項申請。 3.未具有公費生資格",
-    "needs_review": false
-  },
-  {
-    "id": "a3595-102",
-    "title": "臺南市政府-原住民學生獎助學金",
-    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a3595-102",
-    "category": "政府",
-    "deadline": "2026-03-06",
-    "amount": "每名5,000元",
-    "quota": "全國50名",
-    "apply_docs": "1.欲申請本項獎學金者，請於申請期限前，逕向所屬戶籍所在地區公所提出申請。 2.相關申請辦法及申請表格，請參閱網址https://web.tainan.gov.tw/Nation/News.aspx?n=919&sms=9713。",
-    "submit_methods": null,
-    "form_url": null,
-    "eligibility": {
-      "year": [
-        "大一",
-        "大二",
-        "大三",
-        "大四"
-      ],
-      "colleges": "all",
-      "departments": "all",
-      "identity": [
-        "原住民"
-      ],
-      "economic_status": [
-        "無限制"
-      ],
-      "special_conditions": null,
-      "region": [
-        "台南市"
-      ],
-      "region_extra": true,
-      "region_raw": "設籍台南市六個月以上",
-      "gpa_min": 75,
-      "conduct_note": "操行成績需達 60 分",
-      "other_requirements": "不含進修推廣、在職專班、研究所\n如有參加相關原住民服務、族語活動並有證明者，優先錄取。",
-      "can_combine": true
-    },
-    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：具有原住民身分\n身份限制：不含進修推廣、在職專班、研究所\n其他條件：如有參加相關原住民服務、族語活動並有證明者，優先錄取。\n區域條件：設籍台南市六個月以上\n應繳文件：1.欲申請本項獎學金者，請於申請期限前，逕向所屬戶籍所在地區公所提出申請。 2.相關申請辦法及申請表格，請參閱網址https://web.tainan.gov.tw/Nation/News.aspx?n=919&sms=9713。",
     "needs_review": false
   },
   {
