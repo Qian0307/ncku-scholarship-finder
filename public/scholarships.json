@@ -1,5 +1,41 @@
 [
   {
+    "id": "a16115-050",
+    "title": "財團法人黃朝琴獎學基金會-培育優秀人才獎學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a16115-050",
+    "category": "民間",
+    "deadline": "2026-10-31",
+    "amount": "每名每學期50,000元",
+    "quota": "不定",
+    "apply_docs": "欲申請本項獎助學金者，請至網址 https://drive.google.com/drive/folders/1crC_PhjSbijPTdyj1UiT8TmBDlk3e75R?usp=drive_link 參閱相關申請辦法及下載申請表格，並於申請期限前，備妥相關資料，寄至台北市中山區松江路32之1號8樓",
+    "submit_methods": [
+      "郵寄"
+    ],
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "大一",
+        "大二",
+        "大三",
+        "大四"
+      ],
+      "colleges": "all",
+      "departments": "all",
+      "identity": "all",
+      "economic_status": null,
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 60,
+      "conduct_note": "操行成績需達 80 分",
+      "other_requirements": "新生\n僅限大一",
+      "can_combine": false
+    },
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：新生\n其他條件：僅限大一\n應繳文件：欲申請本項獎助學金者，請至網址 https://drive.google.com/drive/folders/1crC_PhjSbijPTdyj1UiT8TmBDlk3e75R?usp=drive_link 參閱相關申請辦法及下載申請表格，並於申請期限前，備妥相關資料，寄至台北市中山區松江路32之1號8樓",
+    "needs_review": true
+  },
+  {
     "id": "a41105-010",
     "title": "社團法人台灣癲癇之友協會-財團法人新光鋼添澄慈善基金會清寒獎助學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a41105-010",
@@ -79,6 +115,39 @@
     },
     "raw_text": "系所條件：不限\n身份條件(家庭狀況)：不限\n其他條件：曾就讀永齡希望小學，並具相關就學紀錄者。\n應繳文件：欲申請本項獎助學金者，請至網址 https://edu.yonglin.org.tw/scholarship 參閱相關申請辦法，並於申請期限前，備妥相關資料， 進行線上申請。",
     "needs_review": false
+  },
+  {
+    "id": "a4591-420",
+    "title": "祐生研究基金會-碩士學位論文獎學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a4591-420",
+    "category": "民間",
+    "deadline": "2026-11-30",
+    "amount": "每名75,000元",
+    "quota": "全國24名",
+    "apply_docs": "欲申請本項獎助學金者，請至網址 https://www.archilife.org/ 參閱相關申請辦法及下載申請表格，並於申請期限前，備妥相關資料，逕寄至104台北市中山區長安東路一段4號2樓 游惠芬小姐收（02-25676220）",
+    "submit_methods": [
+      "郵寄"
+    ],
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "碩"
+      ],
+      "colleges": "all",
+      "departments": "all",
+      "identity": "all",
+      "economic_status": null,
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 70,
+      "conduct_note": "操行成績需達 80 分",
+      "other_requirements": "碩士生\n未領有其他論文類獎學金 獎助課題:共生化相關課題之研究(年度主題,基礎課題請洽生輔組)",
+      "can_combine": false
+    },
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：碩士生\n其他條件：未領有其他論文類獎學金 獎助課題:共生化相關課題之研究(年度主題,基礎課題請洽生輔組)\n區域條件：不限\n應繳文件：欲申請本項獎助學金者，請至網址 https://www.archilife.org/ 參閱相關申請辦法及下載申請表格，並於申請期限前，備妥相關資料，逕寄至104台北市中山區長安東路一段4號2樓 游惠芬小姐收（02-25676220）\n注意事項：*研究成果98.06.10前繳交,相關內容請參考網址:www.archilife.org 資料請逕寄104台北市長春路137巷3 號2樓之1, TEL:02-2567-6220 游小姐",
+    "needs_review": true
   },
   {
     "id": "a15106-080",
@@ -705,6 +774,44 @@
     "needs_review": true
   },
   {
+    "id": "a1388-020",
+    "title": "國立成功大學-員生消費合作社設置本校清寒獎學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a1388-020",
+    "category": "校內",
+    "deadline": "2026-10-07",
+    "amount": "每名6,000元",
+    "quota": "本校9名(每學院各1名)",
+    "apply_docs": "1.本校申請書1份。 2.成績單1份。 3.在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本。 4.清寒相關證明(含里長出具之清寒證明)1份。 5.學生本人郵局存摺正面影本。 【請備妥以上文件，上傳至google表單(網址：https://forms.gle/8MAugFF5LZ7zXbr5A) ，請勿繳交紙本。】",
+    "submit_methods": [
+      "郵寄"
+    ],
+    "form_url": "https://sgd.adm.ncku.edu.tw/sch_file/a13表格/a1388-020申請表格.7z",
+    "eligibility": {
+      "year": [
+        "大一",
+        "大二",
+        "大三",
+        "大四"
+      ],
+      "colleges": "all",
+      "departments": "all",
+      "identity": null,
+      "economic_status": [
+        "清寒"
+      ],
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 75,
+      "conduct_note": "操行成績需達 80 分",
+      "other_requirements": null,
+      "can_combine": false
+    },
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：清寒生\n身份限制：不含新生\n應繳文件：1.本校申請書1份。 2.成績單1份。 3.在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本。 4.清寒相關證明(含里長出具之清寒證明)1份。 5.學生本人郵局存摺正面影本。 【請備妥以上文件，上傳至google表單(網址：https://forms.gle/8MAugFF5LZ7zXbr5A) ，請勿繳交紙本。】\n注意事項：1.獲獎金額6,000元，內含3,000現金(屆時轉帳)；3,000合作社提貨券(屆時通知領取)。 3.上網填報日期：115年08月13日至115年10月07日 中午12:00止。",
+    "needs_review": true
+  },
+  {
     "id": "e1088-020",
     "title": "國立成功大學-蔡玹紀念獎學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=e1088-020",
@@ -899,44 +1006,6 @@
     "needs_review": true
   },
   {
-    "id": "a1388-020",
-    "title": "國立成功大學-員生消費合作社設置本校清寒獎學金",
-    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a1388-020",
-    "category": "校內",
-    "deadline": "2026-10-07",
-    "amount": "每名6,000元",
-    "quota": "本校9名(每學院各1名)",
-    "apply_docs": "1.本校申請書1份。 2.成績單1份。 3.在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本。 4.清寒相關證明(含里長出具之清寒證明)1份。 5.學生本人郵局存摺正面影本。 【請備妥以上文件，上傳至google表單(網址：https://forms.gle/8MAugFF5LZ7zXbr5A) ，請勿繳交紙本。】",
-    "submit_methods": [
-      "郵寄"
-    ],
-    "form_url": "https://sgd.adm.ncku.edu.tw/sch_file/a13表格/a1388-020申請表格.7z",
-    "eligibility": {
-      "year": [
-        "大一",
-        "大二",
-        "大三",
-        "大四"
-      ],
-      "colleges": "all",
-      "departments": "all",
-      "identity": null,
-      "economic_status": [
-        "清寒"
-      ],
-      "special_conditions": null,
-      "region": "all",
-      "region_extra": false,
-      "region_raw": null,
-      "gpa_min": 75,
-      "conduct_note": "操行成績需達 80 分",
-      "other_requirements": null,
-      "can_combine": false
-    },
-    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：清寒生\n身份限制：不含新生\n應繳文件：1.本校申請書1份。 2.成績單1份。 3.在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本。 4.清寒相關證明(含里長出具之清寒證明)1份。 5.學生本人郵局存摺正面影本。 【請備妥以上文件，上傳至google表單(網址：https://forms.gle/8MAugFF5LZ7zXbr5A) ，請勿繳交紙本。】\n注意事項：1.獲獎金額6,000元，內含3,000現金(屆時轉帳)；3,000合作社提貨券(屆時通知領取)。 3.上網填報日期：115年08月13日至115年10月07日 中午12:00止。",
-    "needs_review": true
-  },
-  {
     "id": "b0188-020",
     "title": "國立成功大學-施人豪教授紀念獎學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=b0188-020",
@@ -1100,14 +1169,14 @@
     "needs_review": false
   },
   {
-    "id": "e0688-010",
-    "title": "財團法人成功文化基金會-大禹獎學金",
-    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=e0688-010",
+    "id": "a16115-060",
+    "title": "財團法人和諧孝悌文教基金會-全國孝悌楷模(含孝悌獎學金)",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a16115-060",
     "category": "民間",
-    "deadline": "2026-10-01",
-    "amount": "每名12,000元",
-    "quota": "本校3名",
-    "apply_docs": "1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/gtQiudY1HAHqUWTHA】 2.申請資料： (1)申請表1份【請至google表單內下載】。 (2)成績單1份。 (3)在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本 1份。 (4)清寒相關證明(含里長出具之清寒證明)。",
+    "deadline": "2026-10-02",
+    "amount": "大學部7,000元、碩士班8,000元、博士班10,000元",
+    "quota": "不定",
+    "apply_docs": "(1)孝悌楷模推薦表：請至網址 https://www.fpfoundation.org.tw/index.php 下載 (2)推薦書：由推薦人詳細說明孝悌事蹟，正楷書寫(請儘量檢附電子檔)，請註明撰稿人職稱姓名。一經錄取並授權本會刊登於本會網站。 (3)自述：候選人撰寫具體孝悌事蹟。用正楷書寫(請儘量檢附電子檔)一經錄取並授權本會刊登於本會網站。 (4)戶籍文件：戶口名簿及身分證影本。孝悌事蹟關係人如不同一戶，仍要添附。 (5)本人兩吋半身近照三張(背面註明姓名)及有關孝悌事蹟照片若干張(背面註明主題及姓名)。 (6)學生需在學證明書或學生證影本。 (7)足證明其孝悌事蹟文件影本(如無則免)。",
     "submit_methods": null,
     "form_url": null,
     "eligibility": {
@@ -1119,9 +1188,9 @@
         "碩",
         "博"
       ],
-      "colleges": null,
-      "departments": null,
-      "identity": null,
+      "colleges": "all",
+      "departments": "all",
+      "identity": "all",
       "economic_status": [
         "無限制"
       ],
@@ -1129,13 +1198,13 @@
       "region": "all",
       "region_extra": false,
       "region_raw": null,
-      "gpa_min": 80,
+      "gpa_min": 60,
       "conduct_note": "操行成績需達 80 分",
-      "other_requirements": "1.有清寒證明優先考慮。 2.大學部優先獲獎。",
-      "can_combine": false
+      "other_requirements": null,
+      "can_combine": true
     },
-    "raw_text": "系所條件：土木系(所)、水利系(所)、環工系(所)、測量系(所)\n身份條件(家庭狀況)：不限\n身份限制：不含新生\n其他條件：1.有清寒證明優先考慮。 2.大學部優先獲獎。\n應繳文件：1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/gtQiudY1HAHqUWTHA】 2.申請資料： (1)申請表1份【請至google表單內下載】。 (2)成績單1份。 (3)在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本 1份。 (4)清寒相關證明(含里長出具之清寒證明)。",
-    "needs_review": true
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：不限\n應繳文件：(1)孝悌楷模推薦表：請至網址 https://www.fpfoundation.org.tw/index.php 下載 (2)推薦書：由推薦人詳細說明孝悌事蹟，正楷書寫(請儘量檢附電子檔)，請註明撰稿人職稱姓名。一經錄取並授權本會刊登於本會網站。 (3)自述：候選人撰寫具體孝悌事蹟。用正楷書寫(請儘量檢附電子檔)一經錄取並授權本會刊登於本會網站。 (4)戶籍文件：戶口名簿及身分證影本。孝悌事蹟關係人如不同一戶，仍要添附。 (5)本人兩吋半身近照三張(背面註明姓名)及有關孝悌事蹟照片若干張(背面註明主題及姓名)。 (6)學生需在學證明書或學生證影本。 (7)足證明其孝悌事蹟文件影本(如無則免)。",
+    "needs_review": false
   },
   {
     "id": "c0188-030",
@@ -1213,6 +1282,44 @@
       "can_combine": false
     },
     "raw_text": "系所條件：不限\n身份條件(家庭狀況)：清寒生\n身份限制：不含休學生、退學生、延畢生\n其他條件：新生採原畢業學校成績\n應繳文件：1.申請書。 2.在學證明 或 蓋有註冊章之學生證影本。 3.前一學年成績單。 4.清寒證明文件(限各縣市政府核發之低收入戶 或 中低收入戶 或 特殊境遇家庭學生身分之證明) 5.學生本人郵局存摺正面影本。 【除統計系（所）學生外，請備妥以上文件，上傳至google 表單(網址：https://forms.gle/pmd57utu5NeeoGFn7) ，勿繳交紙本。】\n注意事項：1.統計系(所)學生，依統計系(所)之繳件期限為準，至統計系(所)辦理申請。 2.審查方式：依序核給特殊境遇家庭學生、中低收入、低收入戶學生。 2.申請(含上網填報)期限：115年07月06日至115年10月01日 中午12:00止。",
+    "needs_review": true
+  },
+  {
+    "id": "e0688-010",
+    "title": "財團法人成功文化基金會-大禹獎學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=e0688-010",
+    "category": "民間",
+    "deadline": "2026-10-01",
+    "amount": "每名12,000元",
+    "quota": "本校3名",
+    "apply_docs": "1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/gtQiudY1HAHqUWTHA】 2.申請資料： (1)申請表1份【請至google表單內下載】。 (2)成績單1份。 (3)在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本 1份。 (4)清寒相關證明(含里長出具之清寒證明)。",
+    "submit_methods": null,
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "大一",
+        "大二",
+        "大三",
+        "大四",
+        "碩",
+        "博"
+      ],
+      "colleges": null,
+      "departments": null,
+      "identity": null,
+      "economic_status": [
+        "無限制"
+      ],
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 80,
+      "conduct_note": "操行成績需達 80 分",
+      "other_requirements": "1.有清寒證明優先考慮。 2.大學部優先獲獎。",
+      "can_combine": false
+    },
+    "raw_text": "系所條件：土木系(所)、水利系(所)、環工系(所)、測量系(所)\n身份條件(家庭狀況)：不限\n身份限制：不含新生\n其他條件：1.有清寒證明優先考慮。 2.大學部優先獲獎。\n應繳文件：1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/gtQiudY1HAHqUWTHA】 2.申請資料： (1)申請表1份【請至google表單內下載】。 (2)成績單1份。 (3)在學證明(請至註冊組申請) 或 蓋有註冊章之學生證影本 1份。 (4)清寒相關證明(含里長出具之清寒證明)。",
     "needs_review": true
   },
   {
@@ -2231,6 +2338,40 @@
     "needs_review": false
   },
   {
+    "id": "c0388-060",
+    "title": "長興材料工業股份有限公司-長興獎助學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=c0388-060",
+    "category": "民間",
+    "deadline": "2026-09-24",
+    "amount": "每名30,000元",
+    "quota": "本校合計推薦4名",
+    "apply_docs": "1.申請書請至以下網址下載 https://drive.google.com/drive/folders/1R0puyQNKXOOKJ0XpwJh0ynrPnPtIewVH?usp=drive_link 2.在學證明(請至註冊組辦理申請)1份 3.學年成績單1份 4.未領其他獎學金證明(由生輔組統一出具) 5.戶口名簿影本(或全戶戶籍謄本)1份 6.專題報告一篇",
+    "submit_methods": null,
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "碩",
+        "博"
+      ],
+      "colleges": null,
+      "departments": null,
+      "identity": "all",
+      "economic_status": [
+        "無限制"
+      ],
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 85,
+      "conduct_note": "操行成績需達 80 分",
+      "other_requirements": null,
+      "can_combine": false
+    },
+    "raw_text": "系所條件：化學所,化工所,材料所\n身份條件(家庭狀況)：不限\n應繳文件：1.申請書請至以下網址下載 https://drive.google.com/drive/folders/1R0puyQNKXOOKJ0XpwJh0ynrPnPtIewVH?usp=drive_link 2.在學證明(請至註冊組辦理申請)1份 3.學年成績單1份 4.未領其他獎學金證明(由生輔組統一出具) 5.戶口名簿影本(或全戶戶籍謄本)1份 6.專題報告一篇\n注意事項：1.本獎項將由系所推薦。 2.被推薦者不代表獲獎。",
+    "needs_review": true
+  },
+  {
     "id": "u0289-010",
     "title": "財團法人法治推廣服務基金會-獎學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=u0289-010",
@@ -2455,10 +2596,10 @@
       "region_raw": null,
       "gpa_min": 70,
       "conduct_note": "操行成績需達 80 分",
-      "other_requirements": "1.具教育部特殊教育學生鑑定及就學輔導會鑑定通過，且於教育部特殊教育通報網有登錄者。 2.因該筆經費多由高教深耕計畫項下支應，不易退還予教育部，爰事後會通知同學具填願不予歸還之切結書。【簽署切結書後，則不得再領取其他申請要點明定不得兼領之獎助學金。】",
+      "other_requirements": "具教育部特殊教育學生鑑定及就學輔導會鑑定通過，且於教育部特殊教育通報網有登錄者。",
       "can_combine": false
     },
-    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：特殊教育學生\n其他條件：1.具教育部特殊教育學生鑑定及就學輔導會鑑定通過，且於教育部特殊教育通報網有登錄者。 2.因該筆經費多由高教深耕計畫項下支應，不易退還予教育部，爰事後會通知同學具填願不予歸還之切結書。【簽署切結書後，則不得再領取其他申請要點明定不得兼領之獎助學金。】\n應繳文件：1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/qH8uHcxkMCAMtqEN7】 2.申請資料： (1)本校申請表【請至google表單內下載】。 (2)蓋有註冊章之學生證影本。 (3)鑑輔會鑑定證明書。 (4)身心障礙證明(手冊)影本【若有請提供】。 (5)畢業證書【若有請提供】。 (6)前一學年成績單。 (7)前一學年班排名證明書【僅111學年度以後入學者須提供】。 (8)獎懲證明【可至生輔組申請於成績單上直接蓋獎懲章】。\n注意事項：1.研究生前一學年需修習12學分以上。 2.相關規定： (1)110學年度(含)以前入學者 ： A.獎學金：前一學年學業平均成績80分以上。 B.補助金：前一學年學業平均成績70分以上，未滿80分。 (2)111學年度(含)以後入學者： A.獎學金：前一學年學業平均成績80分以上且班排名前百分之五十。 B.補助金：前一學年學業平均成績70分以上，未滿80分 或 前一學年學業平均成績80分以上而班排名未達前百分之五十。 3.因該筆經費不易退還，爰本組屆時將以電子郵件通知獲獎生，填寫「該筆獎補助一經領取不得退還之切結書」。 4.申請(含上網填報)期限：115年06月17日至115年09月22日止。",
+    "raw_text": "系所條件：不限\n身份條件(家庭狀況)：特殊教育學生\n其他條件：具教育部特殊教育學生鑑定及就學輔導會鑑定通過，且於教育部特殊教育通報網有登錄者。\n應繳文件：1.請填寫完google表單後，繳交紙本至生輔組，方完成申請。【本次採繳交紙本之申請方式；google表單網址：https://forms.gle/qH8uHcxkMCAMtqEN7】 2.申請資料： (1)本校申請表【請至google表單內下載】。 (2)蓋有註冊章之學生證影本。 (3)鑑輔會鑑定證明書。 (4)身心障礙證明(手冊)影本【若有請提供】。 (5)畢業證書【若有請提供】。 (6)前一學年成績單。 (7)前一學年班排名證明書【僅111學年度以後入學者須提供】。 (8)獎懲證明【可至生輔組申請於成績單上直接蓋獎懲章】。\n注意事項：1.研究生前一學年需修習12學分以上。 2.相關規定： (1)110學年度(含)以前入學者 ： A.獎學金：前一學年學業平均成績80分以上。 B.補助金：前一學年學業平均成績70分以上，未滿80分。 (2)111學年度(含)以後入學者： A.獎學金：前一學年學業平均成績80分以上且班排名前百分之五十。 B.補助金：前一學年學業平均成績70分以上，未滿80分 或 前一學年學業平均成績80分以上而班排名未達前百分之五十。 3.因該筆經費不易退還，爰本組屆時將以電子郵件通知獲獎生，填寫「該筆獎補助一經領取不得退還之切結書」。 4.申請(含上網填報)期限：115年06月17日至115年09月22日止。",
     "needs_review": false
   },
   {
@@ -11658,40 +11799,6 @@
     },
     "raw_text": "系所條件：不限\n應繳文件：欲申請本項獎助學金者，請至網址 https://drive.google.com/drive/folders/1R63ND3bfxTepM5mQVV25LJQ-v0ZiqCOe?usp=drive_link 參閱相關申請辦法及下載申請表格，並於申請期限前，備妥相關資料， 進行線上申請 https://reurl.cc/zqDgzN\n注意事項：請填寫線上申請表 ，將申請文件寄至ctbedusprize@gmail.com或以掛號寄至社團法人中華傳統文化儒釋道教育學會(地址:台北市信義路4段341號5樓之1) ，信封註明「申請獎學金」。 若有其他疑義 請撥 連絡電話: 2302-0129分機12 洽詢",
     "needs_review": false
-  },
-  {
-    "id": "c0388-060",
-    "title": "長興材料工業股份有限公司-長興獎助學金",
-    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=c0388-060",
-    "category": "民間",
-    "deadline": "2025-09-26",
-    "amount": "每名30,000元",
-    "quota": "本校合計推薦4名",
-    "apply_docs": "1.申請書請至以下網址下載 https://drive.google.com/drive/folders/1R0puyQNKXOOKJ0XpwJh0ynrPnPtIewVH?usp=drive_link 2.在學證明(請至註冊組辦理申請)1份 3.學年成績單1份 4.未領其他獎學金證明(由生輔組統一出具) 5.戶口名簿影本(或全戶戶籍謄本)1份 6.專題報告一篇",
-    "submit_methods": null,
-    "form_url": null,
-    "eligibility": {
-      "year": [
-        "碩",
-        "博"
-      ],
-      "colleges": null,
-      "departments": null,
-      "identity": "all",
-      "economic_status": [
-        "無限制"
-      ],
-      "special_conditions": null,
-      "region": "all",
-      "region_extra": false,
-      "region_raw": null,
-      "gpa_min": 85,
-      "conduct_note": "操行成績需達 80 分",
-      "other_requirements": null,
-      "can_combine": false
-    },
-    "raw_text": "系所條件：化學所,化工所,材料所\n身份條件(家庭狀況)：不限\n應繳文件：1.申請書請至以下網址下載 https://drive.google.com/drive/folders/1R0puyQNKXOOKJ0XpwJh0ynrPnPtIewVH?usp=drive_link 2.在學證明(請至註冊組辦理申請)1份 3.學年成績單1份 4.未領其他獎學金證明(由生輔組統一出具) 5.戶口名簿影本(或全戶戶籍謄本)1份 6.專題報告一篇\n注意事項：1.本獎項將由系所推薦。 2.被推薦者不代表獲獎。",
-    "needs_review": true
   },
   {
     "id": "a15105-140",
