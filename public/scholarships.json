@@ -2775,6 +2775,37 @@
     "needs_review": false
   },
   {
+    "id": "a13114-050",
+    "title": "教育部清寒優秀學生勵學獎學金",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a13114-050",
+    "category": "政府",
+    "deadline": "2026-10-01",
+    "amount": null,
+    "quota": null,
+    "apply_docs": null,
+    "submit_methods": null,
+    "form_url": null,
+    "eligibility": {
+      "year": null,
+      "colleges": "all",
+      "departments": "all",
+      "identity": "all",
+      "economic_status": [
+        "無限制"
+      ],
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": null,
+      "conduct_note": null,
+      "other_requirements": null,
+      "can_combine": true
+    },
+    "raw_text": "",
+    "needs_review": false
+  },
+  {
     "id": "c0088-010",
     "title": "財團法人成功文化基金會-李定文教授紀念獎學金(松類)",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=c0088-010",
@@ -11076,37 +11107,6 @@
     },
     "raw_text": "系所條件：不限\n身份條件(家庭狀況)：清寒生\n身份限制：不含博士生\n其他條件：1.未領其他獎學金及公費者。 2.各學院大學部三年級(含)以上\n應繳文件：1.申請書1份(需用規定格式,請自行影印使用) 2.成績單1份(含操行成績） 3.學生證影本 4.清寒證明 5.自傳1份 6.推薦信函1份(格式不拘)\n注意事項：1.全學年成績總平均85分以上,且在該系名列前20%者 2.操行不及格或違反校規受處分者不得申請 3.轉學或退學者不得申請",
     "needs_review": true
-  },
-  {
-    "id": "a13114-050",
-    "title": "教育部清寒優秀學生勵學獎學金",
-    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a13114-050",
-    "category": "政府",
-    "deadline": "2025-12-13",
-    "amount": null,
-    "quota": null,
-    "apply_docs": null,
-    "submit_methods": null,
-    "form_url": null,
-    "eligibility": {
-      "year": null,
-      "colleges": "all",
-      "departments": "all",
-      "identity": "all",
-      "economic_status": [
-        "無限制"
-      ],
-      "special_conditions": null,
-      "region": "all",
-      "region_extra": false,
-      "region_raw": null,
-      "gpa_min": null,
-      "conduct_note": null,
-      "other_requirements": null,
-      "can_combine": true
-    },
-    "raw_text": "",
-    "needs_review": false
   },
   {
     "id": "a13113-050",
