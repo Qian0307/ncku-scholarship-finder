@@ -1,5 +1,43 @@
 [
   {
+    "id": "a17115-050",
+    "title": "社團法人中華民國扶濟慈善協會-急難救助",
+    "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a17115-050",
+    "category": "民間",
+    "deadline": "2050-12-31",
+    "amount": "不定",
+    "quota": "不定",
+    "apply_docs": "欲申請本項獎助學金者，請至網址 https://sites.google.com/view/fuji-charity-association/%E6%95%91%E5%8A%A9%E7%94%B3%E8%AB%8B/%E6%80%A5%E9%9B%A3%E6%95%91%E5%8A%A9%E8%BD%89%E4%BB%8B%E8%A1%A8 下載申請表格，並於申請期限前，備妥相關資料，繳交致生輔組。",
+    "submit_methods": null,
+    "form_url": null,
+    "eligibility": {
+      "year": [
+        "大一",
+        "大二",
+        "大三",
+        "大四",
+        "碩",
+        "博"
+      ],
+      "colleges": "all",
+      "departments": "all",
+      "identity": "all",
+      "economic_status": [
+        "無限制"
+      ],
+      "special_conditions": null,
+      "region": "all",
+      "region_extra": false,
+      "region_raw": null,
+      "gpa_min": 0,
+      "conduct_note": null,
+      "other_requirements": "1.限於急難事由發生之日起三個月內提出申請。 2.須同意配合電話訪談、家庭訪問及拍照評估作業。",
+      "can_combine": true
+    },
+    "raw_text": "系所條件：不限\n其他條件：1.限於急難事由發生之日起三個月內提出申請。 2.須同意配合電話訪談、家庭訪問及拍照評估作業。\n應繳文件：欲申請本項獎助學金者，請至網址 https://sites.google.com/view/fuji-charity-association/%E6%95%91%E5%8A%A9%E7%94%B3%E8%AB%8B/%E6%80%A5%E9%9B%A3%E6%95%91%E5%8A%A9%E8%BD%89%E4%BB%8B%E8%A1%A8 下載申請表格，並於申請期限前，備妥相關資料，繳交致生輔組。\n注意事項：限於急難事由發生之日起三個月內提出申請。",
+    "needs_review": false
+  },
+  {
     "id": "a3388-204",
     "title": "三重東區扶輪社-清寒優秀學生獎學金",
     "source_url": "https://sgd.adm.ncku.edu.tw/scholarship/detail.asp?獎項編號=a3388-204",
